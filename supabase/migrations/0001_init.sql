@@ -17,14 +17,17 @@ create table subscriptions (
   updated_at timestamptz not null default now()
 );
 create index subscriptions_email_idx on subscriptions (email);
--- Índices únicos parciais: permitem upsert idempotente no webhook da
--- Kiwify (reenvios não devem criar linhas duplicadas).
+-- Índices únicos (não parciais): permitem upsert idempotente no
+-- webhook da Kiwify via ON CONFLICT (reenvios não devem criar linhas
+-- duplicadas). Múltiplos NULLs não conflitam entre si em índices
+-- únicos do Postgres, então não é preciso "where ... is not null" —
+-- e um índice parcial aqui quebraria o ON CONFLICT simples usado
+-- pelo Supabase (.upsert), que não referencia o predicado da
+-- cláusula WHERE.
 create unique index subscriptions_kiwify_subscription_id_key
-  on subscriptions (kiwify_subscription_id)
-  where kiwify_subscription_id is not null;
+  on subscriptions (kiwify_subscription_id);
 create unique index subscriptions_kiwify_order_id_key
-  on subscriptions (kiwify_order_id)
-  where kiwify_order_id is not null;
+  on subscriptions (kiwify_order_id);
 
 create table profiles (
   id uuid primary key references auth.users(id) on delete cascade,
