@@ -105,6 +105,18 @@ function parseEvent(payload: Record<string, unknown>): ParsedEvent {
 }
 
 export async function POST(request: NextRequest) {
+  if (process.env.KIWIFY_WEBHOOK_DEBUG === "1") {
+    const rawBody = await request.clone().text();
+    console.log(
+      "[kiwify-webhook-debug]",
+      JSON.stringify({
+        url: request.url,
+        headers: Object.fromEntries(request.headers.entries()),
+        body: rawBody,
+      }),
+    );
+  }
+
   if (!isAuthorized(request)) {
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   }
