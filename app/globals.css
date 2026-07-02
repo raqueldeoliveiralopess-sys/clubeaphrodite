@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+:root {
+  --pergaminho: #F5ECDA;
+  --pergaminho-card: #FFFBF2;
+  --vinho: #5C1F33;
+  --vinho-prof: #461525;
+  --vinho-2: #7A2A44;
+  --rose: #A8455F;
+  --rose-suave: #C98B97;
+  --rose-gold: #D9A88C;
+  --dourado: #C9A961;
+  --dourado-claro: #E6D2A2;
+  --texto: #3d2530;
+  --texto-s: #6e555f;
+}
+
+@theme inline {
+  --color-pergaminho: var(--pergaminho);
+  --color-pergaminho-card: var(--pergaminho-card);
+  --color-vinho: var(--vinho);
+  --color-vinho-prof: var(--vinho-prof);
+  --color-vinho-2: var(--vinho-2);
+  --color-rose: var(--rose);
+  --color-rose-suave: var(--rose-suave);
+  --color-rose-gold: var(--rose-gold);
+  --color-dourado: var(--dourado);
+  --color-dourado-claro: var(--dourado-claro);
+  --color-texto: var(--texto);
+  --color-texto-s: var(--texto-s);
+
+  --font-cinzel: var(--font-cinzel);
+  --font-verso: var(--font-cormorant);
+  --font-corpo: var(--font-eb-garamond);
+}
+
+body {
+  font-size: 17px;
+  line-height: 1.7;
+}
